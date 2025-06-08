@@ -16,6 +16,12 @@
         <input type="submit" value="LogOut"/>
     </form>
 
+    <p>
+        <a th:href="@{/products}">
+            <button>상품 목록 조회</button>
+        </a>
+    </p>
+
     <div sec:authorize="hasRole('ROLE_ADMIN')">
         <h3>You will see this only if you are ADMIN</h3>
         <p><a th:href="@{/admin/home}">Admin Home</a></p>
