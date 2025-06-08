@@ -24,9 +24,10 @@
             <h1 class="text-center mb-4">로그인</h1>
 
             <form method="post" th:action="@{/login}">
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                    Invalid Email and Password.
+                <div th:if="${param.error}">
+                    <p style="color:red;">⚠ 로그인 실패: 이메일 또는 비밀번호가 틀렸습니다.</p>
                 </div>
+
 
                 <div th:if="${param.logout}" class="alert alert-info" role="alert">
                     Successfully logged out
