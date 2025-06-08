@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:insert="~{common :: commonHead}">
     <title>Product Manager</title>
@@ -9,7 +9,12 @@
 <body>
 <div class="container">
     <h1 class="mt-5">Product List</h1>
-    <a class="btn btn-primary mb-3" th:href="@{/products/new}">Create New Product</a>
+    <!-- 관리자만 상품 등록 가능 -->
+    <a class="btn btn-primary mb-3"
+       th:href="@{/products/new}"
+       sec:authorize="hasRole('ROLE_ADMIN')">
+        Create New Product
+    </a>
 
     <table class="table table-bordered">
         <thead>
@@ -30,8 +35,14 @@
             <td th:text="${product.madeIn}">Made in</td>
             <td th:text="${product.price}">Price</td>
             <td>
-                <a class="btn btn-primary btn-sm" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
-                <a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+                <!-- 관리자만 Edit/Delete 가능 -->
+                <a class="btn btn-primary btn-sm"
+                   th:href="@{'/products/edit/' + ${product.id}}"
+                   sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
+
+                <a class="btn btn-danger btn-sm"
+                   th:href="@{'/products/delete/' + ${product.id}}"
+                   sec:authorize="hasRole('ROLE_ADMIN')">Delete</a>
             </td>
         </tr>
         </tbody>
